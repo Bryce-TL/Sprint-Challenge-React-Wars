@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 import axios from "axios"
@@ -11,23 +11,27 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
 
+  const [data, setData] = useState()
 
-    const url = 'https://swapi.co/api/people/'
-    const getData = () => {
-      axios
-        .get(url)
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }
 
-    useEffect(() => {
-      getData()
-    }, [])
+  const url = 'https://swapi.co/api/people/'
+  const getData = () => {
+    axios
+      .get(url)
+      .then((res) => {
+        // console.log(res.data.results)
+        setData(res.data.results)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
+  useEffect(() => {
+    getData()
+  }, [])
+  console.log("DATA.RESULTS: ", data)
+  
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
