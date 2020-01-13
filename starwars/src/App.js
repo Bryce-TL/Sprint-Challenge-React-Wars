@@ -11,7 +11,7 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
 
-  const [data, setData] = useState({ characters: [] })
+  const [state, setState] = useState({ characters: [] })
 
 
   const url = 'https://swapi.co/api/people/'
@@ -20,7 +20,7 @@ const App = () => {
       .get(url)
       .then((res) => {
         // console.log(res.data.results)
-        setData({ characters: [...data.characters, res.data.results] })
+        setState({ characters: [...state.characters, res.data.results] })
       })
       .catch((err) => {
         console.log(err)
@@ -30,7 +30,7 @@ const App = () => {
   useEffect(() => {
     getData()
   }, [])
-  console.log("DATA.CHARACTERS: ", data.characters)
+  console.log("STATE.CHARACTERS: ", state.characters)
 
   return (
     <div className="App">
